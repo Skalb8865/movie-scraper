@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Scraper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <main>
+        <div class="header_section">
+            <h1>Movie Scraper</h1>
+            <p>Scrapes OMDB to get data on movies</p>
+        </div>
+        <form method="POST">
+            <input class="movie_input" name="text" placeholder="Enter movie title" autocomplete="off" required>
+            <input class="submit_button" type="submit">
+            <a class="change_page" href="/json">Json</a>
+        </form>
+        {% if movie_data %}
+        <img src="{{ movie_data.Poster }}" alt="{{ movie_data.Title }} Cover Image">
+        <h1>{{ movie_data.Title }}</h1>
+        <p><i class="fa-solid fa-calendar-days"></i>{{ movie_data.Released }}</p>
+        <p><strong>Rated:</strong> {{ movie_data.Rated }}</p>
+        <p><strong>Runtime:</strong> {{ movie_data.Runtime }}</p>
+        <p><strong>Genre:</strong> {{ movie_data.Genre }}</p>
+        <p><strong>Directed By:</strong> {{ movie_data.Director }}</p>
+        <p><strong>Written By:</strong> {{ movie_data.Writer }}</p>
+        <p><strong>Starring:</strong> {{ movie_data.Actors }}</p>
+        <p><strong>Plot:</strong> {{ movie_data.Plot }}</p>
+        <p><strong>Language:</strong> {{ movie_data.Language }}</p>
+        <p><strong>Country:</strong> {{ movie_data.Country }}</p>
+        <p><strong>Awards:</strong> {{ movie_data.Awards }}</p>
+        <p><strong>Boxoffice:</strong> {{ movie_data.BoxOffice }}</p>
+        {% endif %}
+    </main>
+    <footer>
+        <a href="https://github.com/Skalb8865" target="_blank">Github</a>
+        <p>Made By Sean Kalb</p>
+    </footer>
+</body>
+
+</html>

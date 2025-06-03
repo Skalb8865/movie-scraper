@@ -1,63 +1,29 @@
+from flask import Blueprint, request, render_template
+
 import requests
 
+movie_scraper = Blueprint("movie_scraper", __name__)
+
+@movie_scraper.route("/", methods=["GET", "POST"])
+def home():
+    movie_data = None
+    if request.method == "POST":
+        text = request.form["text"]
+        movie_data = fetch_movie_data(text)
+    return render_template("index.html", movie_data=movie_data)
+
 def fetch_movie_data(title):
-    url = f"http://www.omdbapi.com/?i=tt3896198&apikey=259c7947&t={title}"
+    url = f"http://www.omdbapi.com/?apikey=259c7947&t={title}"
     response = requests.get(url)
     return response.json()
-    
-# movie_data = fetch_movie_data("Shadow Force")
-# movie_data2 = fetch_movie_data("Clown in a Cornfield")
-# movie_data3 = fetch_movie_data("Friendship")
-# movie_data4 = fetch_movie_data("Juliet & Romeo")
-# movie_data5 = fetch_movie_data("The Lightning Code")
-movie_data6 = fetch_movie_data("Final Destination: Bloodlines")
-movie_data7 = fetch_movie_data("Teenage Mutant Ninja Turtles: The Rise of Leo")
-# movie_data8 = fetch_movie_data("Lilo & Stitch")
-movie_data9 = fetch_movie_data("Mission: Impossible - The Final Reckoning")
-movie_data10 = fetch_movie_data("Karate Kid: Legends")
-# print(movie_data)
-# print("")
-# print("")
-# print("")
-# print("")
-# print(movie_data2)
-# print("")
-# print("")
-# print("")
-# print("")
-# print(movie_data3)
-# print("")
-# print("")
-# print("")
-# print("")
-# print(movie_data4)
-# print("")
-# print("")
-# print("")
-# print("")
-# print(movie_data5)
-print("")
-print("")
-print("")
-print("")
-print(movie_data6)
-print("")
-print("")
-print("")
-print("")
-print(movie_data7)
-# print("")
-# print("")
-# print("")
-# print("")
-# print(movie_data8)
-print("")
-print("")
-print("")
-print("")
-print(movie_data9)
-print("")
-print("")
-print("")
-print("")
-print(movie_data10)
+
+
+
+@movie_scraper.route("/json", methods=["GET", "POST"])
+def json():
+    movie_data = None
+    if request.method == "POST":
+        text = request.form["text"]
+        movie_data = fetch_movie_data(text)
+        return movie_data
+    return render_template("json.html", movie_data=movie_data)
