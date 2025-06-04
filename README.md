@@ -1,1 +1,1 @@
-https://movie-scraper-gsxj.onrender.com/
+https://moviescraper-production.up.railway.app/
